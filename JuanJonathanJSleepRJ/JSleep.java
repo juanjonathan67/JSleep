@@ -83,6 +83,6 @@ public class JSleep
         System.out.println("Original Price : " + js.originalPrice);
         System.out.println("Admin Fee % : " + js.getAdminFeePercentage() + "%");
         System.out.println("Admin Fee : " + js.getAdminFee(5000));
-        System.out.println("Total Fee : " + js.getTotalPrice(5000, 4));
+        System.out.println("Total Fee : " + js.getTotalPrice(5000, 2));
     }
 }
