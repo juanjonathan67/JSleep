@@ -29,31 +29,29 @@ public class JSleep
     }
 
     public float getDiscountPercentage(int beforeDiscount, int afterDiscount){
-        if(beforeDiscount > 0){
-            if(beforeDiscount < afterDiscount){
-                return 0.0f;
-            }else{
-                return ((1 - (float)(afterDiscount) / beforeDiscount)) * 100;
-            }
-        }else{
+        if(beforeDiscount < afterDiscount){
             return 0.0f;
+        }else{
+            if(beforeDiscount != 0){
+                return ((1 - (float)(afterDiscount) / beforeDiscount)) * 100;
+            }else{
+                return 0.0f;
+            }
         }
     }
 
     public int getDiscountedPrice(int price, float discountPercentage){
         if(discountPercentage > 100){
-            return (int)(price - price);
-        }else{
-            return (int)(price - price * discountPercentage / 100);
+            discountPercentage = 100;
         }
+        return (int)(price - price * discountPercentage / 100);
     }
 
     public int getOriginalPrice(int discountedPrice, float discountPercentage){
-        if(discountPercentage > 100){
-            return (int)(discountedPrice + discountedPrice);
-        }else{
-            return (int)(discountedPrice * ((discountPercentage / 100) + 1));
+        if(discountPercentage >= 100){
+            return 0;
         }
+        return (int)(discountedPrice / ((100 - discountPercentage) / 100));
     }
 
     public float getAdminFeePercentage(){
@@ -75,14 +73,14 @@ public class JSleep
         System.out.println("Hotel ID : " + js.getHotelID());
         System.out.println("Hotel name : " + js.getHotelName());
         System.out.println("Discount? : " + js.isDiscount());
-        js.discountPercentage = js.getDiscountPercentage(1000, 900);
+        js.discountPercentage = js.getDiscountPercentage(0, 1);
         System.out.println("Discount % : " + js.discountPercentage + "%");
-        js.discountedPrice = js.getDiscountedPrice(5000, js.discountPercentage);
+        js.discountedPrice = js.getDiscountedPrice(1000, 120.0f);
         System.out.println("Discounted Price : " + js.discountedPrice);
-        js.originalPrice = js.getOriginalPrice(js.discountedPrice, js.discountPercentage);
+        js.originalPrice = js.getOriginalPrice(100, 100.0f);
         System.out.println("Original Price : " + js.originalPrice);
         System.out.println("Admin Fee % : " + js.getAdminFeePercentage() + "%");
-        System.out.println("Admin Fee : " + js.getAdminFee(5000));
-        System.out.println("Total Fee : " + js.getTotalPrice(5000, 2));
+        System.out.println("Admin Fee : " + js.getAdminFee(10000));
+        System.out.println("Total Fee : " + js.getTotalPrice(0, 2));
     }
 }
