@@ -27,8 +27,7 @@ public class Voucher{
     public double apply(Price price){
         this.used = true;
         if(this.type == Type.DISCOUNT){
-            this.cut = price.price * this.cut / 100;
-            return price.price - this.cut;
+            return price.price * (1 - this.cut / 100);
         }else{ // when REBATE
             return price.price - this.cut;
         }
