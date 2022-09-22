@@ -9,5 +9,5 @@ public enum Facility
     FitnessCenter,
     Refrigerator,
     Restaurant,
-    SwimmingPool
+    SwimmingPool;
 }

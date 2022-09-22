@@ -2,9 +2,9 @@ package JuanJonathanJSleepRJ;
 
 public class Price
 {
-    double price;
-    double rebate;
-    int discount;
+    public double price;
+    public double rebate;
+    public int discount;
     
     public Price(double price){
         this.price = price;
@@ -33,7 +33,7 @@ public class Price
 
     private double getRebatedPrice(){
         if(rebate > price){
-            rebate = price;
+            return price;
         }
         return price - rebate;
     }
