@@ -2,7 +2,7 @@ package JuanJonathanJSleepRJ;
 
 public enum Facility
 {
-    Wifi,
+    WiFi,
     Bathtub,
     Balcony,
     AC,

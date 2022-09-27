@@ -7,27 +7,27 @@ public class Rating
 
     public Rating()
     {
-        total = 0;
-        count = 0;
+        this.total = 0;
+        this.count = 0;
     }
 
     public void insert(int rating){
-        total += rating;
-        count++;
+        this.total += rating;
+        this.count++;
     }
 
     public double getAverage(){
         if(count == 0){
-            return 0;
+            return 0.0;
         }
-        return total / count;
+        return this.total / this.count;
     }
 
     public long getCount(){
-        return count;
+        return this.count;
     }
 
     public long getTotal(){
-        return total;
+        return this.total;
     }
 }
