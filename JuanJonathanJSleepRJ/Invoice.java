@@ -35,6 +35,10 @@ public class Invoice extends Serializable
     
     /**
      * Constructor with assignment of buyer / renter id, as well as time of rent / buy from passed Objects
+     * @param id ID of transacation
+     * @param buyer Object of the buyer
+     * @param renter Object of the renter
+     * @param time Time of transaction
      */
     public Invoice(int id, Account buyer, Renter renter, String time){
         super(id);
