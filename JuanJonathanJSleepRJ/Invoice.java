@@ -22,7 +22,8 @@ public class Invoice extends Serializable
      * Time of buy / rent
      */
     public String time;
-    
+    PaymentStatus status;
+    RoomRating rating;
     /**
      * Constructor with direct assignment of buyer / renter id, as well as time of rent / buy
      */
@@ -31,6 +32,8 @@ public class Invoice extends Serializable
         this.buyerId = buyerId;
         this.renterId = renterId;
         this.time = time;
+        this.status = PaymentStatus.Waiting;
+        this.rating = RoomRating.NONE;
     }
     
     /**
@@ -45,6 +48,8 @@ public class Invoice extends Serializable
         this.buyerId = buyer.id;
         this.renterId = renter.id;
         this.time = time;
+        this.status = PaymentStatus.Waiting;
+        this.rating = RoomRating.NONE;
     }
     
     /**
