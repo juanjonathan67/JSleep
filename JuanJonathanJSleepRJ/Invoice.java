@@ -36,8 +36,8 @@ public class Invoice extends Serializable
         SUCCESS;
     }
 
-    PaymentStatus status = PaymentStatus.WAITING;
-    RoomRating rating = RoomRating.NONE;
+    public PaymentStatus status = PaymentStatus.WAITING;
+    public RoomRating rating = RoomRating.NONE;
 
     /**
      * Constructor with direct assignment of buyer / renter id, as well as time of rent / buy
