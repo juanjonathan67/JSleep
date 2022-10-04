@@ -1,5 +1,8 @@
 package JuanJonathanJSleepRJ;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Payment class holds information about transaction details.
  * Subclass of Serializable
@@ -14,11 +17,11 @@ public class Payment extends Invoice
     /**
      * Who is being paid
      */
-    public String to;
+    public Calendar to;
     /**
      * Who is paying
      */
-    public String from;
+    public Calendar from;
     /**
      * Room ID that is being paid
      */
@@ -33,18 +36,20 @@ public class Payment extends Invoice
      * @param from Who is paying
      * @param to Who is being paid
      */
-    public Payment(int id, int buyerId, int renterId, String time, int roomId, String from, String to){
-        super(id, buyerId, renterId, time);
+    public Payment(int id, int buyerId, int renterId, int roomId){
+        super(id, buyerId, renterId);
         this.roomId = roomId;
-        this.to = to;
-        this.from = from;
+        this.from = Calendar.getInstance();
+        this.to = Calendar.getInstance();
+        to.add(Calendar.DATE, 2);
     }
     
-    public Payment(int id, Account buyer, Renter renter, String time, int roomId, String from, String to){
-        super(id, buyer, renter, time);
+    public Payment(int id, Account buyer, Renter renter, int roomId){
+        super(id, buyer, renter);
         this.roomId = roomId;
-        this.to = to;
-        this.from = from;
+        this.from = Calendar.getInstance();
+        this.to = Calendar.getInstance();
+        to.add(Calendar.DATE, 2);
     }
     
     public String print(){
@@ -53,5 +58,18 @@ public class Payment extends Invoice
     
     public int getRoomId(){
         return this.roomId;
+    }
+
+    public String getDuration(){
+        SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String fromFormatted = SDFormat.format(from.getTime());
+        String toFormatted = SDFormat.format(to.getTime());
+        return fromFormatted + " - " + toFormatted;
+    }
+
+    public String getTime(){
+        SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
+        String timeFormatted = SDFormat.format(this.time.getTime());
+        return "Formatted Date = " + timeFormatted;
     }
 }

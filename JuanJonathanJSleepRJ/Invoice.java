@@ -1,5 +1,7 @@
 package JuanJonathanJSleepRJ;
 
+import java.util.Calendar;
+
 /**
  * Invoice class holds indentifications of the buyer, renter, and time of buy/rent.
  * Subclass of Serializable
@@ -21,7 +23,8 @@ public class Invoice extends Serializable
     /**
      * Time of buy / rent
      */
-    public String time;
+    public Calendar time;
+
 
     public enum RoomRating{
         NONE,
@@ -42,11 +45,13 @@ public class Invoice extends Serializable
     /**
      * Constructor with direct assignment of buyer / renter id, as well as time of rent / buy
      */
-    protected Invoice(int id, int buyerId, int renterId, String time){
+    protected Invoice(int id, int buyerId, int renterId){
         super(id);
+        this.time = Calendar.getInstance();
         this.buyerId = buyerId;
         this.renterId = renterId;
-        this.time = time;
+        this.rating = RoomRating.NONE;
+        this.status = PaymentStatus.WAITING;
     }
     
     /**
@@ -56,11 +61,13 @@ public class Invoice extends Serializable
      * @param renter Object of the renter
      * @param time Time of transaction
      */
-    public Invoice(int id, Account buyer, Renter renter, String time){
+    public Invoice(int id, Account buyer, Renter renter){
         super(id);
+        this.time = Calendar.getInstance();
         this.buyerId = buyer.id;
         this.renterId = renter.id;
-        this.time = time;
+        this.rating = RoomRating.NONE;
+        this.status = PaymentStatus.WAITING;
     }
     
     /**
