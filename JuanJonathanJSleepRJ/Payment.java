@@ -61,12 +61,12 @@ public class Payment extends Invoice
         return this.roomId;
     }
 
-    public String getDuration(){
-        SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
-        String fromFormatted = SDFormat.format(from.getTime());
-        String toFormatted = SDFormat.format(to.getTime());
-        return fromFormatted + " - " + toFormatted;
-    }
+    // public String getDuration(){
+    //     SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
+    //     String fromFormatted = SDFormat.format(from.getTime());
+    //     String toFormatted = SDFormat.format(to.getTime());
+    //     return fromFormatted + " - " + toFormatted;
+    // }
 
     public String getTime(){
         SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
@@ -75,6 +75,9 @@ public class Payment extends Invoice
     }
 
     public static boolean availability(Date from, Date to, Room room){
+        if(to.before(from)){
+            return false;
+        }
         if(room.booked.isEmpty()){
             return true;
         }
@@ -89,9 +92,6 @@ public class Payment extends Invoice
     }
 
     public static boolean makeBooking(Date from, Date to, Room room){
-        if(to.before(from)){
-            return false;
-        }
         if(Payment.availability(from, to, room)){
             room.booked.add(from);
             room.booked.add(to);
