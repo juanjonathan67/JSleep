@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class Validate
 {
-    public static ArrayList filter(Price[] list, int value, boolean less){
-        ArrayList result = new ArrayList(); 
+    public static ArrayList<Double> filter(Price[] list, int value, boolean less){
+        ArrayList<Double> result = new ArrayList<Double>(); 
         if(less){
             for(Price num : list){
                 if(num.price <= value){

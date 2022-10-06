@@ -1,7 +1,8 @@
 package JuanJonathanJSleepRJ;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+// import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Payment class holds information about transaction details.
@@ -17,11 +18,11 @@ public class Payment extends Invoice
     /**
      * Who is being paid
      */
-    public Calendar to;
+    public Date to;
     /**
      * Who is paying
      */
-    public Calendar from;
+    public Date from;
     /**
      * Room ID that is being paid
      */
@@ -36,20 +37,20 @@ public class Payment extends Invoice
      * @param from Who is paying
      * @param to Who is being paid
      */
-    public Payment(int id, int buyerId, int renterId, int roomId){
+    public Payment(int id, int buyerId, int renterId, int roomId, Date from, Date to){
         super(id, buyerId, renterId);
         this.roomId = roomId;
-        this.from = Calendar.getInstance();
-        this.to = Calendar.getInstance();
-        to.add(Calendar.DATE, 2);
+        this.from = from;
+        this.to = to;
+        // to.add(Calendar.DATE, 2);
     }
     
-    public Payment(int id, Account buyer, Renter renter, int roomId){
+    public Payment(int id, Account buyer, Renter renter, int roomId, Date from, Date to){
         super(id, buyer, renter);
         this.roomId = roomId;
-        this.from = Calendar.getInstance();
-        this.to = Calendar.getInstance();
-        to.add(Calendar.DATE, 2);
+        this.from = from;
+        this.to = to;
+        // to.add(Calendar.DATE, 2);
     }
     
     public String print(){
@@ -71,5 +72,32 @@ public class Payment extends Invoice
         SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
         String timeFormatted = SDFormat.format(this.time.getTime());
         return "Formatted Date = " + timeFormatted;
+    }
+
+    public static boolean availability(Date from, Date to, Room room){
+        if(room.booked.isEmpty()){
+            return true;
+        }
+        for(int i = 0; i < room.booked.size(); i += 2){
+            if((to.after(room.booked.get(i)) && to.before(room.booked.get(i + 1)))){
+                return false;
+            }else if(from.after(room.booked.get(i)) && from.before(room.booked.get(i + 1))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean makeBooking(Date from, Date to, Room room){
+        if(to.before(from)){
+            return false;
+        }
+        if(Payment.availability(from, to, room)){
+            room.booked.add(from);
+            room.booked.add(to);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
