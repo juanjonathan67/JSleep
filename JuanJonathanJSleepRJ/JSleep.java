@@ -63,6 +63,7 @@ public class JSleep
     
 
     public static void main(String[] args) {
+    	System.out.println("Hello from eclipse!");
         Room RoomA = JSleep.createRoom();
         Room RoomB = JSleep.createRoom();
         System.out.println("Membuat booking dari tanggal 15 hingga 18");
