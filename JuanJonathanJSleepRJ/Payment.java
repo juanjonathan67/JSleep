@@ -1,7 +1,7 @@
 package JuanJonathanJSleepRJ;
 
 import java.text.SimpleDateFormat;
-// import java.util.Calendar;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -81,10 +81,8 @@ public class Payment extends Invoice
         if(room.booked.isEmpty()){
             return true;
         }
-        for(int i = 0; i < room.booked.size(); i += 2){
-            if((to.after(room.booked.get(i)) && to.before(room.booked.get(i + 1)))){
-                return false;
-            }else if(from.after(room.booked.get(i)) && from.before(room.booked.get(i + 1))){
+        for(int i = 0; i < room.booked.size(); i++){
+            if(room.booked.get(i).after(from) && room.booked.get(i).before(to)){
                 return false;
             }
         }
@@ -93,8 +91,11 @@ public class Payment extends Invoice
 
     public static boolean makeBooking(Date from, Date to, Room room){
         if(Payment.availability(from, to, room)){
-            room.booked.add(from);
-            room.booked.add(to);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(from);
+            for(Date i = from; i.before(to); cal.add(Calendar.DATE, 1), i = cal.getTime()){
+                room.booked.add(i);
+            }
             return true;
         }else{
             return false;
