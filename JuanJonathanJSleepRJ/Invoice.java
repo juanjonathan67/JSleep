@@ -46,8 +46,7 @@ public class Invoice extends Serializable
     /**
      * Constructor with direct assignment of buyer / renter id, as well as time of rent / buy
      */
-    protected Invoice(int id, int buyerId, int renterId){
-        super(id);
+    protected Invoice(int buyerId, int renterId){
         this.time = new Date();
         this.buyerId = buyerId;
         this.renterId = renterId;
@@ -62,8 +61,7 @@ public class Invoice extends Serializable
      * @param renter Object of the renter
      * @param time Time of transaction
      */
-    public Invoice(int id, Account buyer, Renter renter){
-        super(id);
+    public Invoice(Account buyer, Renter renter){
         this.time = new Date();
         this.buyerId = buyer.id;
         this.renterId = renter.id;

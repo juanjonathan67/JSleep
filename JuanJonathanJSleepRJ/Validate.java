@@ -20,7 +20,7 @@ public class Validate
             }
         }else{
             for(Price num : list){
-                if(num.price >= value){
+                if(num.price > value){
                     result.add(num.price);
                 }
             }

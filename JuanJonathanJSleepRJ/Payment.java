@@ -37,16 +37,16 @@ public class Payment extends Invoice
      * @param from Who is paying
      * @param to Who is being paid
      */
-    public Payment(int id, int buyerId, int renterId, int roomId, Date from, Date to){
-        super(id, buyerId, renterId);
+    public Payment(int buyerId, int renterId, int roomId, Date from, Date to){
+        super(buyerId, renterId);
         this.roomId = roomId;
         this.from = from;
         this.to = to;
         // to.add(Calendar.DATE, 2);
     }
     
-    public Payment(int id, Account buyer, Renter renter, int roomId, Date from, Date to){
-        super(id, buyer, renter);
+    public Payment(Account buyer, Renter renter, int roomId, Date from, Date to){
+        super(buyer, renter);
         this.roomId = roomId;
         this.from = from;
         this.to = to;

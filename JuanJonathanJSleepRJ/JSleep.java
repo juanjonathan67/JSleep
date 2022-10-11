@@ -1,6 +1,8 @@
 package JuanJonathanJSleepRJ;
 
-import java.sql.Date;
+import java.util.ArrayList;
+
+// import java.sql.Date;
 
 public class JSleep
 {
@@ -56,70 +58,25 @@ public class JSleep
     
     
     public static Room createRoom(){
-        Price price = new Price(100000, 5);
-        Room room = new Room(1, "hotel", 30, price, Facility.AC, City.BALI, "Bali Street");
+        Price price = new Price(100000, 0.5);
+        Room room = new Room("Hotel", 30, price, Facility.AC, City.DEPOK, "Jalan Margonda Raya");
         return room;
     }
     
 
     public static void main(String[] args) {
-    	// System.out.println("Hello from eclipse!");
-        Room RoomA = JSleep.createRoom();
-        Room RoomB = JSleep.createRoom();
-        System.out.println("Membuat booking dari tanggal 15 hingga 18");
-        Date start = Date.valueOf("2022-8-15");
-        Date end = Date.valueOf("2022-8-20");
-        System.out.println(Payment.makeBooking(start, end,RoomA));
-        System.out.println("Membuat booking dari tanggal 15 hingga 18");
-        Date start2 = Date.valueOf("2022-8-13");
-        Date end2 = Date.valueOf("2022-8-16");
-        System.out.println(Payment.makeBooking(start2, end2,RoomA));
-        System.out.println("Membuat booking dari tanggal 15 hingga 18 untuk kamar berbeda");
-        Date start3 = Date.valueOf("2022-8-18");
-        Date end3 = Date.valueOf("2022-8-20");
-        System.out.println(Payment.makeBooking(start3, end3,RoomB));
-        // Payment testPayment = new Payment(2, 2, 2,2);
-        // System.out.println(testPayment.getTime());
-        // System.out.println(testPayment.getDuration());
-        // Price[] unfilteredArray = new Price[5];
-        // for(int i=0;i < unfilteredArray.length;i++){
-        // int j = 5000;
-        // unfilteredArray[i] = new Price((i+1)*j);
-        // } System.out.println("Price List");
-        // for(int i=0;i < unfilteredArray.length;i++){
-        // System.out.println(unfilteredArray[i].price);
-        // } System.out.println("Below 12000.0");
-        // System.out.println(Validate.filter(unfilteredArray, 12000,true));
-        // System.out.println("Above 10000.0");
-        // System.out.println(Validate.filter(unfilteredArray, 10000,false));
-        // Complaint testComplain = new Complaint(1, "23 August 2022", "Bad Quality");
-        // Price testPrice = new Price(100000, 20000);
-        // Room testRoom = new Room(1, "Presidential Suite", 5, testPrice,
-        // Facility.FitnessCenter, City.DEPOK, "JL. Margonda Raya");
-        // Account testAccount = new Account(1, "Bob", "bob@gmail.com", "bob");
-        // Rating testRating = new Rating();
-        // System.out.println(testComplain.toString());
-        // System.out.println(testRoom.toString());
-        // System.out.println(testAccount.toString());
-        // System.out.println(testPrice.toString());
-        // System.out.println(testRating.toString());
-        // Payment testRoom = new Payment(1, 1, 1, "", 1, "", "");
-        // Invoice testInvoice = new Invoice(2,2,2, "");
-        // System.out.println(testRoom.print());
-        // System.out.println(testInvoice.print());
-        // Room test = createRoom();
-        // System.out.println(test.name);
-        // System.out.println(test.size);
-        // System.out.println(test.price.price);
-        // System.out.println(test.facility);
-        // System.out.println("Hotel ID : " + JSleep.getHotelID());
-        // System.out.println("Hotel name : " + JSleep.getHotelName());
-        // System.out.println("Discount? : " + JSleep.isDiscount());
-        // System.out.println("Discount % : " + JSleep.getDiscountPercentage(1000, 900) + "%");
-        // System.out.println("Discounted Price : " + JSleep.getDiscountedPrice(1000, 20.0f));
-        // System.out.println("Original Price : " + JSleep.getOriginalPrice(900, 10.0f));
-        // System.out.println("Admin Fee % : " + JSleep.getAdminFeePercentage() + "%");
-        // System.out.println("Admin Fee : " + JSleep.getAdminFee(10000));
-        // System.out.println("Total Fee : " + JSleep.getTotalPrice(10000, 2));
+        ArrayList<Room> RoomSerialized = new ArrayList<Room>();
+        for(int i = 0; i < 5; i++){
+            RoomSerialized.add(i, JSleep.createRoom());
+            System.out.println(RoomSerialized.get(i).toString());
+        }
+        Account acc = new Account("Juan", "JJ@gmail.com", "812748");
+        Room test = JSleep.createRoom();
+        Serializable.setClosingID(Room.class, 2);
+        Serializable.setClosingID(Account.class, 2);
+        System.out.println(Serializable.getClosingID(Account.class));
+        System.out.println(Serializable.getClosingID(Room.class)); 
+        System.out.println(test.equals(Account.class));
+        // System.out.println(RoomSerialized.get(4).equals(test));
     }
 }

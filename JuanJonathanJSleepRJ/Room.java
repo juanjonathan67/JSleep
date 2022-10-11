@@ -32,8 +32,7 @@ public class Room extends Serializable implements FileParser
     }
 
    
-    public Room(int id, String name, int size, Price price, Facility facility, City city, String address){
-        super(id);
+    public Room(String name, int size, Price price, Facility facility, City city, String address){
         this.name = name;
         this.size = size;
         this.price = price;
@@ -45,6 +44,6 @@ public class Room extends Serializable implements FileParser
     public String toString(){
         return "Name : " + this.name + "\nSize : " + this.size + "\nPrice : " + this.price
         + "\nFacility : " + this.facility + "\nAddress : " + this.address + "\nCity : " +
-        this.city;
+        this.city + "\nID : " + this.id + "\n";
     }
 }

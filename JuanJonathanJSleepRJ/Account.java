@@ -14,8 +14,7 @@ public class Account extends Serializable implements FileParser
         return false;
     }
     
-    public Account(int id, String name, String email, String password){
-        super(id);
+    public Account(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = password;
