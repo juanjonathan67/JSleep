@@ -65,18 +65,26 @@ public class JSleep
     
 
     public static void main(String[] args) {
-        ArrayList<Room> RoomSerialized = new ArrayList<Room>();
-        for(int i = 0; i < 5; i++){
-            RoomSerialized.add(i, JSleep.createRoom());
-            System.out.println(RoomSerialized.get(i).toString());
+        // For testing purposes only
+        ArrayList<Integer> test = new ArrayList<Integer>();
+        for(int i = 0; i < 20; i++){
+            test.add(i + 1);
         }
-        Account acc = new Account("Juan", "JJ@gmail.com", "812748");
-        Room test = JSleep.createRoom();
-        Serializable.setClosingID(Room.class, 2);
-        Serializable.setClosingID(Account.class, 2);
-        System.out.println(Serializable.getClosingID(Account.class));
-        System.out.println(Serializable.getClosingID(Room.class)); 
-        System.out.println(test.equals(Account.class));
+        System.out.println(Algorithm.paginate(test, 2, 8, null));
+        // ArrayList<Room> RoomSerialized = new ArrayList<Room>();
+        // for(int i = 0; i < 5; i++){
+        //     RoomSerialized.add(i, JSleep.createRoom());
+        //     System.out.println(RoomSerialized.get(i).toString());
+        // }
+        // Account acc = new Account("Juan", "JJ@gmail.com", "812748");
+        // Room test = JSleep.createRoom();
+        // Serializable.setClosingID(Room.class, 2);
+        // Serializable.setClosingID(Account.class, 2);
+        // Account acc2 = new Account("Juan", "JJ@gmail.com", "812748");
+        // Room test2 = JSleep.createRoom();
+        // System.out.println(Serializable.getClosingID(Account.class));
+        // System.out.println(Serializable.getClosingID(Room.class)); 
+        // System.out.println(test.equals(acc));
         // System.out.println(RoomSerialized.get(4).equals(test));
     }
 }

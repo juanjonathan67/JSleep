@@ -1,7 +1,9 @@
 package JuanJonathanJSleepRJ;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class Algorithm {
     private Algorithm(){
@@ -109,5 +111,64 @@ public class Algorithm {
                 return current;
         }
         return null;
+    }
+
+    public static <T> List<T> collect(T[] array, T value){
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return collect(it, value);
+    }
+
+    public static <T> List<T> collect(Iterable<T> iterable, T value){
+        final Iterator<T> it = iterable.iterator();
+        return collect(it, value);
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, T value){
+        final Predicate<T> pred = value::equals;
+        return collect(iterator, pred);
+    }
+
+    public static <T> List<T> collect(T[] array, Predicate<T> pred){
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return collect(it, pred);
+    }
+
+    public static <T> List<T> collect(Iterable<T> iterable, Predicate<T> pred){
+        final Iterator<T> it = iterable.iterator();
+        return collect(it, pred);
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, Predicate<T> pred){
+        List<T> lst = new ArrayList<T>();
+        while(iterator.hasNext()){
+            T current = iterator.next();
+            if(pred.predicate(current))
+                lst.add(current);
+        }
+        return lst;
+    }
+
+    public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred){
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return paginate(it, page, pageSize, pred);
+    }
+
+    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred){
+        final Iterator<T> it = iterable.iterator();
+        return paginate(it, page, pageSize, pred);
+    }
+
+    public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred){
+        List<T> lst = new ArrayList<T>();
+        int index = 0;
+        int begin = page * pageSize;
+        int end = (page + 1) * pageSize;
+        while(iterator.hasNext()){
+            T current = iterator.next();
+            if(pred.predicate(current) && (begin <= index && index < end))
+                lst.add(current);
+            index++;
+        }
+        return lst;
     }
 }
