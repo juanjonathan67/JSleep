@@ -1,6 +1,12 @@
 package JuanJonathanJSleepRJ;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import com.google.gson.*;
+
+// import java.util.ArrayList;
 
 // import java.sql.Date;
 
@@ -56,35 +62,30 @@ public class JSleep
     //     return price * numberOfNight + getAdminFee(price * numberOfNight);
     // }
     
+    // public static Room createRoom(){
+    //     Price price = new Price(100000, 0.5);
+    //     Room room = new Room("Hotel", 30, price, Facility.AC, City.DEPOK, "Jalan Margonda Raya");
+    //     return room;
+    // }
     
-    public static Room createRoom(){
-        Price price = new Price(100000, 0.5);
-        Room room = new Room("Hotel", 30, price, Facility.AC, City.DEPOK, "Jalan Margonda Raya");
-        return room;
+    class Country{
+        public String name;
+        public int population;
+        public List<String> listOfStates;
     }
     
-
     public static void main(String[] args) {
-        // For testing purposes only
-        ArrayList<Integer> test = new ArrayList<Integer>();
-        for(int i = 0; i < 20; i++){
-            test.add(i + 1);
+        String filepath = "C:\\Users\\juanj\\OneDrive\\Documents\\Kuliah\\Semester 3\\OOP\\Praktikum\\Case Study\\Java\\JSleep\\JuanJonathanJSleepRJ\\city.json";
+        Gson gson = new Gson();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            Country input = gson.fromJson(br, Country.class);
+            System.out.println("Name : " + input.name);
+            System.out.println("Population : " + input.population);
+            System.out.println("States : ");
+            input.listOfStates.forEach(state -> System.out.println(state));
+        }catch(IOException e){
+            e.printStackTrace();
         }
-        System.out.println(Algorithm.paginate(test, 2, 8, null));
-        // ArrayList<Room> RoomSerialized = new ArrayList<Room>();
-        // for(int i = 0; i < 5; i++){
-        //     RoomSerialized.add(i, JSleep.createRoom());
-        //     System.out.println(RoomSerialized.get(i).toString());
-        // }
-        // Account acc = new Account("Juan", "JJ@gmail.com", "812748");
-        // Room test = JSleep.createRoom();
-        // Serializable.setClosingID(Room.class, 2);
-        // Serializable.setClosingID(Account.class, 2);
-        // Account acc2 = new Account("Juan", "JJ@gmail.com", "812748");
-        // Room test2 = JSleep.createRoom();
-        // System.out.println(Serializable.getClosingID(Account.class));
-        // System.out.println(Serializable.getClosingID(Room.class)); 
-        // System.out.println(test.equals(acc));
-        // System.out.println(RoomSerialized.get(4).equals(test));
     }
 }
