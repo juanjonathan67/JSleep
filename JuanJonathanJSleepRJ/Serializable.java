@@ -18,37 +18,23 @@ public class Serializable
         this.id = serial;
     }
 
-    public boolean equals(Object ob){
-        if(ob instanceof Serializable){
-            Serializable temp = (Serializable) ob;
-            if(Integer.valueOf(this.id).compareTo(temp.id) == 0){
-                return true;
-            }
-        }
-        return false;
+    public boolean equals(Object other){
+        return other instanceof Serializable && ((Serializable) other).id == id;
     }
 
-    public boolean equals(Serializable ser){
-        if(Integer.valueOf(this.id).compareTo(ser.id) == 0){
-            return true;
-        }
-        return false;
+    public boolean equals(Serializable other){
+        return other.id == id;
     }
 
-    public int compareTo(Serializable ser){
-        return Integer.valueOf(this.id).compareTo(Integer.valueOf(ser.id));
+    public int compareTo(Serializable other){
+        return Integer.compare(this.id, other.id);
     }
 
     public static <T> Integer setClosingID(Class<T> cl, int id){
-        Integer temp = mapCounter.get(cl);
-        mapCounter.put(cl, id);
-        return temp;
+        return mapCounter.put(cl, id);
     }
 
     public static <T> Integer getClosingID(Class<T> cl){
-        if(mapCounter.containsKey(cl)){
-            return mapCounter.get(cl);
-        }
-        return 0;
+        return mapCounter.get(cl);
     }
 }

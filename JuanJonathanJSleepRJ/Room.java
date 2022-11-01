@@ -3,8 +3,9 @@ package JuanJonathanJSleepRJ;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Room extends Serializable implements FileParser
+public class Room extends Serializable
 {
+    public int accountId;
     public int size;
     public String name;
     public Facility facility;
@@ -22,17 +23,9 @@ public class Room extends Serializable implements FileParser
         this.facility = facility;
     }
     */
-    
-    public Object write(){
-        return null;
-    }
-    
-    public boolean read(String a){
-        return false;
-    }
-
    
-    public Room(String name, int size, Price price, Facility facility, City city, String address){
+    public Room(int accountId, String name, int size, Price price, Facility facility, City city, String address){
+        this.accountId = accountId;
         this.name = name;
         this.size = size;
         this.price = price;

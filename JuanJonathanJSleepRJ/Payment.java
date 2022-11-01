@@ -1,6 +1,8 @@
 package JuanJonathanJSleepRJ;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -75,14 +77,15 @@ public class Payment extends Invoice
     }
 
     public static boolean availability(Date from, Date to, Room room){
-        if(to.before(from)){
+        Calendar start = Calendar.getInstance();
+        start.setTime(from);
+        Calendar end = Calendar.getInstance();
+        end.setTime(to);
+        if(start.after(end) || start.equals(end)){
             return false;
         }
-        if(room.booked.isEmpty()){
-            return true;
-        }
-        for(int i = 0; i < room.booked.size(); i++){
-            if(room.booked.get(i).after(from) && room.booked.get(i).before(to)){
+        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+            if(room.booked.contains(date)){
                 return false;
             }
         }
@@ -90,15 +93,16 @@ public class Payment extends Invoice
     }
 
     public static boolean makeBooking(Date from, Date to, Room room){
-        if(Payment.availability(from, to, room)){
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(from);
-            for(Date i = from; i.before(to); cal.add(Calendar.DATE, 1), i = cal.getTime()){
-                room.booked.add(i);
+        if(availability(from, to, room)){
+            Calendar start = Calendar.getInstance();
+            start.setTime(from);
+            Calendar end = Calendar.getInstance();
+            end.setTime(to);
+            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                room.booked.add(date);
             }
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 }

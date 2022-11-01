@@ -1,18 +1,9 @@
 package JuanJonathanJSleepRJ;
 
-public class Account extends Serializable implements FileParser
-{
+public class Account extends Serializable{
     public String name;
     public String email;
     public String password;
-    
-    public Object write(){
-        return null;
-    }
-    
-    public boolean read(String a){
-        return false;
-    }
     
     public Account(String name, String email, String password){
         this.name = name;

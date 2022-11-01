@@ -10,21 +10,22 @@ import java.util.ArrayList;
  */
 public class Validate
 {
-    public static ArrayList<Double> filter(Price[] list, int value, boolean less){
-        ArrayList<Double> result = new ArrayList<Double>(); 
-        if(less){
-            for(Price num : list){
-                if(num.price <= value){
-                    result.add(num.price);
-                }
-            }
-        }else{
-            for(Price num : list){
-                if(num.price > value){
-                    result.add(num.price);
+    public static ArrayList filter (Price[] list, int value, boolean less){
+        ArrayList filteredPrice = new ArrayList();
+        if(less == true) {
+            for (Price iterator : list) {
+                if(iterator.price <= value){
+                    filteredPrice.add(iterator.price);
                 }
             }
         }
-        return result;
+        else{
+            for (Price iterator : list) {
+                if(iterator.price > value){
+                    filteredPrice.add(iterator.price);
+                }
+            }
+        }
+        return filteredPrice;
     }
 }

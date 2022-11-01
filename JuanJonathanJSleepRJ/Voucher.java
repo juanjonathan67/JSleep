@@ -1,6 +1,6 @@
 package JuanJonathanJSleepRJ;
 
-public class Voucher extends Serializable implements FileParser
+public class Voucher extends Serializable
 {
     public Type type;
     public double cut;
@@ -19,14 +19,6 @@ public class Voucher extends Serializable implements FileParser
         this.used = false;
     }
     */
-
-    public Object write(){
-        return null;
-    }
-    
-    public boolean read(String a){
-        return false;
-    }
    
     public Voucher(String name, int code, Type type, boolean used, double minimum, double cut){
         this.name = name;
