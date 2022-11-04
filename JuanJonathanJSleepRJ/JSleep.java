@@ -78,7 +78,7 @@ public class JSleep
 //    }
     
     public static List<Room> filterByCity(List<Room> rooms, String city, int page, int pageSize){
-        List<Room> searchedList = Algorithm.<Room>paginate(rooms, page, pageSize, room -> room.city == City.valueOf(city.toUpperCase()));
+        List<Room> searchedList = Algorithm.<Room>paginate(rooms, page, pageSize, room -> city.equalsIgnoreCase(room.city.toString()));
         return searchedList;
     }
 
@@ -102,36 +102,37 @@ public class JSleep
     }
     
     public static void main(String[] args) {
+        Account acc = new Account("kemasrafly2", "kemasrAfly2@Gmail.ui.ac.id", "123Juan1.!i3f");
+        System.out.println(acc.validate());
+        try {
+            String filepath = "json/account.json";
+            
+            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+            Account add = new Account("name", "email", "password");
+            tableAccount.add(add);
+            JsonTable.writeJson(tableAccount, filepath);
+            tableAccount.forEach(account -> System.out.println(account.toString()));
+        }catch(Throwable t){
+            t.printStackTrace();
+        }
+        for(int i = 0; i < 10; i++) {
+            ThreadingObject thread = new ThreadingObject("Thread " + i);
+        }
 //          Renter testRegex = new Renter("Netlab_", "081234567890", "Jl Margonda Raya");
 //          Renter testRegexFail = new Renter("netlab", "081", "Jalan");
 //          System.out.println(testRegex.validate());
 //          System.out.println(testRegexFail.validate());
-            Account acc = new Account("kemasrafly2", "kemasrAfly2@Gmail.ui.ac.id", "123Juan1.!i3f");
-            System.out.println(acc.validate());
-            try {
-                String filepath = "json/account.json";
-                
-                JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
-                Account add = new Account("name", "email", "password");
-                tableAccount.add(add);
-                JsonTable.writeJson(tableAccount, filepath);
-                tableAccount.forEach(account -> System.out.println(account.toString()));
-            }catch(Throwable t){
-                t.printStackTrace();
-            }
-            for(int i = 0; i < 10; i++) {
-                ThreadingObject thread = new ThreadingObject("Thread " + i);
-            }
             
-        //   try {
-        //       String filepath = "json\\randomRoomList.json";
-              
-        //       JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
-        //       List<Room> filterTableRoom = JSleep.filterByCity(tableRoom, "medan", 0, 5);
-        //       filterTableRoom.forEach(room -> System.out.println(room.toString()));
-        //   }catch(Throwable t){
-        //       t.printStackTrace();
-        //   }
+            
+//            try {
+//                String filepath = "json\\randomRoomList.json";
+//               
+//                JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
+//                List<Room> filterTableRoom = JSleep.filterByCity(tableRoom, "medan", 0, 5);
+//                filterTableRoom.forEach(room -> System.out.println(room.toString()));
+//            }catch(Throwable t){
+//               t.printStackTrace();
+//            }
 //        String filepath = "C:\\Users\\juanj\\OneDrive\\Documents\\Kuliah\\Semester 3\\OOP\\Praktikum\\Case Study\\Java\\JSleep\\JuanJonathanJSleepRJ\\city.json";
 //        Gson gson = new Gson();
 //        try {
