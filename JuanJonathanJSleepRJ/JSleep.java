@@ -106,15 +106,32 @@ public class JSleep
 //          Renter testRegexFail = new Renter("netlab", "081", "Jalan");
 //          System.out.println(testRegex.validate());
 //          System.out.println(testRegexFail.validate());
-          try {
-              String filepath = "json\\randomRoomList.json";
+            Account acc = new Account("kemasrafly2", "kemasrAfly2@Gmail.ui.ac.id", "123Juan1.!i3f");
+            System.out.println(acc.validate());
+            try {
+                String filepath = "json/account.json";
+                
+                JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+                Account add = new Account("name", "email", "password");
+                tableAccount.add(add);
+                JsonTable.writeJson(tableAccount, filepath);
+                tableAccount.forEach(account -> System.out.println(account.toString()));
+            }catch(Throwable t){
+                t.printStackTrace();
+            }
+            for(int i = 0; i < 10; i++) {
+                ThreadingObject thread = new ThreadingObject("Thread " + i);
+            }
+            
+        //   try {
+        //       String filepath = "json\\randomRoomList.json";
               
-              JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
-              List<Room> filterTableRoom = JSleep.filterByAccountId(tableRoom, 11, 0, 5);
-              filterTableRoom.forEach(room -> System.out.println(room.toString()));
-          }catch(Throwable t){
-              t.printStackTrace();
-          }
+        //       JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
+        //       List<Room> filterTableRoom = JSleep.filterByCity(tableRoom, "medan", 0, 5);
+        //       filterTableRoom.forEach(room -> System.out.println(room.toString()));
+        //   }catch(Throwable t){
+        //       t.printStackTrace();
+        //   }
 //        String filepath = "C:\\Users\\juanj\\OneDrive\\Documents\\Kuliah\\Semester 3\\OOP\\Praktikum\\Case Study\\Java\\JSleep\\JuanJonathanJSleepRJ\\city.json";
 //        Gson gson = new Gson();
 //        try {
