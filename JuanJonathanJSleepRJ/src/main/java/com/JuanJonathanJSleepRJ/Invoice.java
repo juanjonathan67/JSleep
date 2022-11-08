@@ -3,6 +3,8 @@ package com.JuanJonathanJSleepRJ;
 // import java.util.Calendar;
 import java.util.Date;
 
+import com.JuanJonathanJSleepRJ.dbjson.Serializable;
+
 /**
  * Invoice class holds indentifications of the buyer, renter, and time of buy/rent.
  * Subclass of Serializable

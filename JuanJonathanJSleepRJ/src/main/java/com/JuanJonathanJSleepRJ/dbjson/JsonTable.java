@@ -1,4 +1,4 @@
-package com.JuanJonathanJSleepRJ;
+package com.JuanJonathanJSleepRJ.dbjson;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

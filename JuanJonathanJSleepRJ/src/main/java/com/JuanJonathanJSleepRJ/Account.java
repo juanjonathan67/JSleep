@@ -1,11 +1,15 @@
 package com.JuanJonathanJSleepRJ;
 
-import java.util.regex.*;;
+import java.util.regex.*;
+
+import com.JuanJonathanJSleepRJ.dbjson.Serializable;;
 
 public class Account extends Serializable{
     public String name;
     public String email;
     public String password;
+    public double balance;
+    public Renter renter;
     public static final String REGEX_EMAIL = "^[A-Za-z0-9]+@[A-Za-z]+\\.[A-Za-z.]+[^.]$";
     public static final String REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
     

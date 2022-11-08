@@ -3,6 +3,10 @@ package com.JuanJonathanJSleepRJ;
 import java.util.ArrayList;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.JuanJonathanJSleepRJ.dbjson.JsonDBEngine;
+import com.JuanJonathanJSleepRJ.dbjson.JsonTable;
+
 import java.util.List;
 
 //import java.io.BufferedReader;
@@ -18,67 +22,11 @@ import java.util.List;
 @SpringBootApplication
 public class JSleep
 {
-    // public static int getHotelID(){
-    //     return 0;
-    // }
-
-    // public static String getHotelName(){
-    //     return "hotel";
-    // }
-
-    // public static boolean isDiscount(){
-    //     return true;
-    // }
-
-    // public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
-    //     if(beforeDiscount < afterDiscount){
-    //         return 0.0f;
-    //     }else{
-    //         if(beforeDiscount != 0){
-    //             return ((1 - (float)(afterDiscount) / beforeDiscount)) * 100;
-    //         }else{
-    //             return 0.0f;
-    //         }
-    //     }
-    // }
-
-    // public static int getDiscountedPrice(int price, float discountPercentage){
-    //     if(discountPercentage > 100){
-    //         discountPercentage = 100;
-    //     }
-    //     return (int)(price - price * discountPercentage / 100);
-    // }
-
-    // public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-    //     if(discountPercentage >= 100){
-    //         return 0;
-    //     }
-    //     return (int)(discountedPrice / ((100 - discountPercentage) / 100));
-    // }
-
-    // public static float getAdminFeePercentage(){
-    //     return 0.05f;
-    // }
-
-    // public static int getAdminFee(int price){
-    //     return (int)(price * getAdminFeePercentage());
-    // }
-
-    // public static int getTotalPrice(int price, int numberOfNight){
-    //     return price * numberOfNight + getAdminFee(price * numberOfNight);
-    // }
-    
     public static Room createRoom(){
         Price price = new Price(100000, 0.5);
         Room room = new Room(1, "Hotel", 30, price, Facility.AC, City.DEPOK, "Jalan Margonda Raya");
         return room;
     }
-    
-//    class Country{
-//        public String name;
-//        public int population;
-//        public List<String> listOfStates;
-//    }
     
     public static List<Room> filterByCity(List<Room> rooms, String city, int page, int pageSize){
         List<Room> searchedList = Algorithm.<Room>paginate(rooms, page, pageSize, room -> city.equalsIgnoreCase(room.city.toString()));
@@ -105,20 +53,23 @@ public class JSleep
     }
     
     public static void main(String[] args) {
-    	SpringApplication.run(JSleep.class, args);
+        JsonDBEngine.Run(JSleep.class);
+        SpringApplication.run(JSleep.class, args);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
+    	// SpringApplication.run(JSleep.class, args);
 //        Account acc = new Account("kemasrafly2", "kemasrAfly2@Gmail.ui.ac.id", "123Juan1.!i3f");
 //        System.out.println(acc.validate());
-//        try {
-//            String filepath = "json/account.json";
-//            
-//            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
-//            Account add = new Account("name", "email", "password");
-//            tableAccount.add(add);
-//            JsonTable.writeJson(tableAccount, filepath);
-//            tableAccount.forEach(account -> System.out.println(account.toString()));
-//        }catch(Throwable t){
-//            t.printStackTrace();
-//        }
+        // try {
+        //     String filepath = "json/account.json";
+            
+        //     JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+        //     Account add = new Account("name", "email", "password");
+        //     tableAccount.add(add);
+        //     JsonTable.writeJson(tableAccount, filepath);
+        //     tableAccount.forEach(account -> System.out.println(account.toString()));
+        // }catch(Throwable t){
+        //     t.printStackTrace();
+        // }
 //        for(int i = 0; i < 10; i++) {
 //            ThreadingObject thread = new ThreadingObject("Thread " + i);
 //        }

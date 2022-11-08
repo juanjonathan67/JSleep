@@ -3,6 +3,8 @@ package com.JuanJonathanJSleepRJ;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.JuanJonathanJSleepRJ.dbjson.Serializable;
+
 public class Room extends Serializable
 {
     public int accountId;

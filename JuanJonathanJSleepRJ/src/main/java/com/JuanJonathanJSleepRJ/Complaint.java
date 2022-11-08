@@ -1,5 +1,6 @@
 package com.JuanJonathanJSleepRJ;
 
+import com.JuanJonathanJSleepRJ.dbjson.Serializable;
 
 /**
  * Write a description of class Complaint here.

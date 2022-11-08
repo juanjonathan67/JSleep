@@ -2,6 +2,8 @@ package com.JuanJonathanJSleepRJ;
 
 import java.util.regex.*;
 
+import com.JuanJonathanJSleepRJ.dbjson.Serializable;
+
 public class Renter extends Serializable
 {
     public String phoneNumber;
