@@ -25,7 +25,7 @@ public class Room extends Serializable
         this.facility = facility;
     }
     */
-   
+
     public Room(int accountId, String name, int size, Price price, Facility facility, City city, String address){
         this.accountId = accountId;
         this.name = name;

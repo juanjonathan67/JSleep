@@ -1,7 +1,7 @@
 package com.JuanJonathanJSleepRJ;
 
-// import java.util.Calendar;
 import java.util.Date;
+import java.util.Calendar;
 
 import com.JuanJonathanJSleepRJ.dbjson.Serializable;
 
@@ -23,11 +23,6 @@ public class Invoice extends Serializable
      * Id of the renter
      */
     public int renterId;
-    /**
-     * Time of buy / rent
-     */
-    public Date time;
-
 
     public enum RoomRating{
         NONE,
@@ -49,7 +44,6 @@ public class Invoice extends Serializable
      * Constructor with direct assignment of buyer / renter id, as well as time of rent / buy
      */
     protected Invoice(int buyerId, int renterId){
-        this.time = new Date();
         this.buyerId = buyerId;
         this.renterId = renterId;
         this.rating = RoomRating.NONE;
@@ -64,11 +58,40 @@ public class Invoice extends Serializable
      * @param time Time of transaction
      */
     public Invoice(Account buyer, Renter renter){
-        this.time = new Date();
         this.buyerId = buyer.id;
         this.renterId = renter.id;
         this.rating = RoomRating.NONE;
         this.status = PaymentStatus.WAITING;
+    }
+
+    public static boolean availability(Date from, Date to, Room room){
+        Calendar start = Calendar.getInstance();
+        start.setTime(from);
+        Calendar end = Calendar.getInstance();
+        end.setTime(to);
+        if(start.after(end) || start.equals(end)){
+            return false;
+        }
+        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+            if(room.booked.contains(date)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean makeBooking(Date from, Date to, Room room){
+        if(availability(from, to, room)){
+            Calendar start = Calendar.getInstance();
+            start.setTime(from);
+            Calendar end = Calendar.getInstance();
+            end.setTime(to);
+            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                room.booked.add(date);
+            }
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -76,6 +99,6 @@ public class Invoice extends Serializable
      * @return this class' atributes.
      */
     public String print(){
-        return "Buyer ID : " + buyerId + "\nRenter ID : " + renterId + "\nTime : " + time;
+        return "Buyer ID : " + buyerId + "\nRenter ID : " + renterId;
     }
 }
