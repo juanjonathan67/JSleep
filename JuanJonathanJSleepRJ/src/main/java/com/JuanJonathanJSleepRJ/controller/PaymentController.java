@@ -4,6 +4,7 @@ import com.JuanJonathanJSleepRJ.dbjson.JsonAutowired;
 
 import java.util.Date;
 import java.text.*;
+import java.time.Duration;
 
 import javax.xml.crypto.Data;
 
@@ -39,9 +40,10 @@ public class PaymentController implements BasicGetController<Payment>{
         try {
             Date fromDate = sdf.parse(from);
             Date toDate = sdf.parse(to);
-            if(foundacc != null && foundroom != null && foundroom.price.price <= foundacc.balance && Invoice.availability(fromDate, toDate, foundroom)){
+            double totalPrice = foundroom.price.price * (toDate.getDate() - fromDate.getDate());
+            if(foundacc != null && foundroom != null && totalPrice <= foundacc.balance && Invoice.availability(fromDate, toDate, foundroom)){
                 Payment pay = new Payment(buyerId, renterId, roomId);
-                foundacc.balance -= foundroom.price.price;
+                foundacc.balance -= totalPrice;
                 pay.status = PaymentStatus.WAITING;
                 Invoice.makeBooking(fromDate, toDate, foundroom);
                 paymentTable.add(pay);
@@ -60,7 +62,6 @@ public class PaymentController implements BasicGetController<Payment>{
         Payment paymentFound = Algorithm.<Payment>find(paymentTable, payment -> payment.id == id);
         if (paymentFound != null && Invoice.PaymentStatus.WAITING.toString().equals("WAITING")) {
             paymentFound.status = Invoice.PaymentStatus.SUCCESS;
-
             return true;
         }else {
             return false;
@@ -70,9 +71,9 @@ public class PaymentController implements BasicGetController<Payment>{
     @PostMapping("/{id}/cancel")
     boolean cancel(@PathVariable int id){
         
-        Payment paymentFound = Algorithm.<Payment>find(paymentTable,payment -> payment.id == id);
-        Account accountFound = Algorithm.<Account>find(AccountController.accountTable,prod -> prod.id == paymentFound.buyerId);
-        Room roomFound = Algorithm.<Room>find(RoomController.roomTable,pred -> pred.id == paymentFound.getRoomId());
+        Payment paymentFound = Algorithm.<Payment>find(paymentTable, payment -> payment.id == id);
+        Account accountFound = Algorithm.<Account>find(AccountController.accountTable, acc -> acc.id == paymentFound.buyerId);
+        Room roomFound = Algorithm.<Room>find(RoomController.roomTable, room -> room.id == paymentFound.getRoomId());
 
         if (paymentFound != null && Invoice.PaymentStatus.WAITING.toString().equals("WAITING")) {
             paymentFound.status = Invoice.PaymentStatus.FAILED;

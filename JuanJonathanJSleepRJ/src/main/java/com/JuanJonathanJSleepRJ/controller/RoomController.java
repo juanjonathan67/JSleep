@@ -30,7 +30,7 @@ public class RoomController implements BasicGetController<Room>{
 
     @PostMapping("/create")
     public Room create(
-        @RequestParam int accountid,
+        @RequestParam int accountId,
         @RequestParam String name,
         @RequestParam int size,
         @RequestParam int price,
@@ -38,8 +38,9 @@ public class RoomController implements BasicGetController<Room>{
         @RequestParam City city,
         @RequestParam String address
     ){
-        if(Algorithm.<Room>exists(roomTable, room -> (room.accountId == accountid))){
-            Room room = new Room(accountid, name, size, new Price(price), facility, city, address);
+    	Account foundacc = Algorithm.<Account>find(AccountController.accountTable, acc -> acc.id == accountId);
+        if(foundacc != null && foundacc.renter != null){
+            Room room = new Room(accountId, name, size, new Price(price), facility, city, address);
             roomTable.add(room);
             return room;
         }else{
