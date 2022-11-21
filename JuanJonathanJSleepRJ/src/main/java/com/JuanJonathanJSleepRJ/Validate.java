@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Validate
 {
     public static ArrayList filter (Price[] list, int value, boolean less){
-        ArrayList filteredPrice = new ArrayList();
+        ArrayList<Double> filteredPrice = new ArrayList<>();
         if(less == true) {
             for (Price iterator : list) {
                 if(iterator.price <= value){

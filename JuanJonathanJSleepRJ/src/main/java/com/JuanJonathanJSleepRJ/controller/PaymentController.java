@@ -3,6 +3,7 @@ package com.JuanJonathanJSleepRJ.controller;
 import com.JuanJonathanJSleepRJ.dbjson.JsonAutowired;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.text.*;
 import java.time.Duration;
 
@@ -40,7 +41,8 @@ public class PaymentController implements BasicGetController<Payment>{
         try {
             Date fromDate = sdf.parse(from);
             Date toDate = sdf.parse(to);
-            double totalPrice = foundroom.price.price * (toDate.getDate() - fromDate.getDate());
+            long duration = toDate.getTime() - fromDate.getTime();
+            double totalPrice = foundroom.price.price * (TimeUnit.MILLISECONDS.toDays(duration));
             if(foundacc != null && foundroom != null && totalPrice <= foundacc.balance && Invoice.availability(fromDate, toDate, foundroom)){
                 Payment pay = new Payment(buyerId, renterId, roomId);
                 foundacc.balance -= totalPrice;

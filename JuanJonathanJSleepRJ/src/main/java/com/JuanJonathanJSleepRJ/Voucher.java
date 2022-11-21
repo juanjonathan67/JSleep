@@ -21,7 +21,7 @@ public class Voucher extends Serializable
         this.used = false;
     }
     */
-   
+    
     public Voucher(String name, int code, Type type, boolean used, double minimum, double cut){
         this.name = name;
         this.code = code;
