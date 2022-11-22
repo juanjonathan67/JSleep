@@ -69,6 +69,9 @@ public class AccountController implements BasicGetController<Account>{
 		if (name.isBlank()) {
 			return null;
 		}
+		if(Algorithm.<Account>exists(accountTable, acc -> acc.email.equals(email) && acc.name.equals(name) && acc.password.equals(password))){
+			return null;
+		}
 		else if(mail.find() && pass.find()) {
 			String generatedPassword = null;
 			try {
