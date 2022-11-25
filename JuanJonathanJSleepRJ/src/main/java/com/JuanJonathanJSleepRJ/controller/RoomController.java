@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import com.JuanJonathanJSleepRJ.dbjson.*;
 import com.JuanJonathanJSleepRJ.*;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 
@@ -34,17 +35,27 @@ public class RoomController implements BasicGetController<Room>{
         @RequestParam String name,
         @RequestParam int size,
         @RequestParam int price,
-        @RequestParam Facility facility,
+        @RequestParam ArrayList<Facility> facility,
         @RequestParam City city,
+        @RequestParam BedType bedType,
         @RequestParam String address
     ){
     	Account foundacc = Algorithm.<Account>find(AccountController.accountTable, acc -> acc.id == accountId);
         if(foundacc != null && foundacc.renter != null){
-            Room room = new Room(accountId, name, size, new Price(price), facility, city, address);
+            Room room = new Room(accountId, name, size, new Price(price), facility, city, bedType, address);
             roomTable.add(room);
             return room;
         }else{
             return null;
         }
+    }
+
+    @GetMapping("/getAllRoom")
+    List<Room> getAllRoom(
+        @RequestParam int page,
+        @RequestParam int pageSize
+    ){
+        
+        return Algorithm.<Room>paginate(roomTable, page, pageSize, pred -> true);
     }
 }

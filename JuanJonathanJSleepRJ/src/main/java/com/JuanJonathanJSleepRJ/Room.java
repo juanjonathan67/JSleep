@@ -10,7 +10,7 @@ public class Room extends Serializable
     public int accountId;
     public int size;
     public String name;
-    public Facility facility;
+    public ArrayList<Facility> facility = new ArrayList<Facility>();
     public Price price;
     public String address;
     public City city;
@@ -26,13 +26,14 @@ public class Room extends Serializable
     }
     */
 
-    public Room(int accountId, String name, int size, Price price, Facility facility, City city, String address){
+    public Room(int accountId, String name, int size, Price price, ArrayList<Facility> facility, City city, BedType bedType, String address){
         this.accountId = accountId;
         this.name = name;
         this.size = size;
         this.price = price;
         this.facility = facility;
         this.city = city;
+        this.bedType = bedType;
         this.address = address;
     }
 

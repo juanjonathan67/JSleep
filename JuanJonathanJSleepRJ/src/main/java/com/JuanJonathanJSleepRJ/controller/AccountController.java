@@ -102,9 +102,9 @@ public class AccountController implements BasicGetController<Account>{
 		@RequestParam String address, 
 		@RequestParam String phoneNumber
 	){
-		Account found = Algorithm.<Account>find(getJsonTable(), acc -> acc.id == id && acc.renter == null);
+		Account found = Algorithm.<Account>find(accountTable, acc -> acc.id == id && acc.renter == null);
 		if(found != null){
-			found.renter = new Renter(username, phoneNumber, address);;
+			found.renter = new Renter(username, phoneNumber, address);
 			return found.renter;
 		}else{
 			return null;
@@ -116,7 +116,7 @@ public class AccountController implements BasicGetController<Account>{
 		@PathVariable int id, 
 		@RequestParam double balance
 	){
-		Account found = Algorithm.<Account>find(getJsonTable(), acc -> acc.id == id);
+		Account found = Algorithm.<Account>find(accountTable, acc -> acc.id == id);
 		if(found != null){
 			found.balance += balance;
 			return true;
