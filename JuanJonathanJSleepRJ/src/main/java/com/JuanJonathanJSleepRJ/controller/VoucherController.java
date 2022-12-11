@@ -7,8 +7,15 @@ import com.JuanJonathanJSleepRJ.*;
 
 import java.util.List;
 
+/**
+ * Voucher Controller Class -
+ * Contains methods related to Voucher, such as create, paginate, filter, etc.
+ * @deprecated
+ * @author juanjonathan67
+ * @version 1.0.0
+ */
 @RestController
-
+@Deprecated
 @RequestMapping("/voucher")
 public class VoucherController implements BasicGetController<Voucher>{
     

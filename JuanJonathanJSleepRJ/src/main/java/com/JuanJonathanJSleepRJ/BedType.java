@@ -2,10 +2,10 @@ package com.JuanJonathanJSleepRJ;
 
 
 /**
- * Enumeration class BedType - write a description of the enum class here
- *
- * @author (your name here)
- * @version (version number or date here)
+ * Enumeration class BedType -
+ * Enum of the rooms' bed type.
+ * @author juanjonathan67
+ * @version 1.0.0
  */
 public enum BedType
 {

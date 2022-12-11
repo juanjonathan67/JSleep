@@ -1,5 +1,13 @@
 package com.JuanJonathanJSleepRJ;
 
+/**
+ * Threading Object Class - 
+ * Class to handle threads
+ * @deprecated
+ * @author juanjonathan67
+ * @version 1.0.0
+ */
+@Deprecated
 public class ThreadingObject extends Thread{
     public ThreadingObject(String name) {
         super(name);
